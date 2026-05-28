@@ -45,7 +45,7 @@ class AmazonProjectorScraper:
         self.driver.switch_to.frame(item_url)
     
     def filter_brand(self, brand_name):
-        """Applies filter """
+        """Applies brand filter """
         try:
             see_more = self.driver.find_element(By.XPATH, "//a[@aria-label='See more, Brands']")
             time.sleep(1) 
@@ -63,6 +63,7 @@ class AmazonProjectorScraper:
             logger.error(f"Brand {brand_name} not found")
 
     def filter_price(self, price):
+        """Applies price filter """
         try:
             filter_element = self.driver.find_element(By.LINK_TEXT, price)
             time.sleep(1) 
@@ -72,6 +73,7 @@ class AmazonProjectorScraper:
             logger.error(f"Filter range not found")
 
     def filter_review(self):
+        """Applies review filter """
         try:
             filter_element = self.driver.find_element(By.XPATH, "//i[@class='a-icon a-icon-star-medium a-star-medium-4']")
             time.sleep(1) 
@@ -144,6 +146,7 @@ class AmazonProjectorScraper:
         return extracted_data
 
     def save_to_csv(self, data, filename):
+        """save to csv file"""
         try:
             fields = ["Name", "Price", "Rating", "Reviews", "URL"]
             with open(filename, mode='w', newline='', encoding='utf-8') as file:
